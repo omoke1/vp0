@@ -13,7 +13,7 @@ const IntegrationSection: React.FC = () => {
     },
     {
       id: 2,
-      title: 'VPO Adapter',
+      title: 'Veyra Adapter',
       description: 'Smart Contract Integration',
       icon: 'zap',
       position: 'center'
@@ -63,7 +63,7 @@ const IntegrationSection: React.FC = () => {
               Integration Architecture
             </h3>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4 sm:px-0">
-              VPO connects seamlessly with existing prediction market infrastructure
+              Veyra connects seamlessly with existing prediction market infrastructure
             </p>
           </div>
           

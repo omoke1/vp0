@@ -60,6 +60,8 @@ export const useAppStore = create<AppState>()(
       clearError: () => set({ error: null }),
       
       launchApp: () => {
+        console.log('🚀 Launching Veyra App...');
+        
         set({ 
           isAppLaunched: true, 
           isLoading: true,
@@ -69,6 +71,7 @@ export const useAppStore = create<AppState>()(
         
         // Simulate app initialization with progressive loading
         setTimeout(() => {
+          console.log('✅ Veyra App launched successfully');
           set({ isLoading: false });
         }, 1200);
       },
@@ -143,7 +146,7 @@ export const useAppStore = create<AppState>()(
       }
     }),
     {
-      name: 'vpo-app-store',
+      name: 'veyra-app-store',
     }
   )
 );

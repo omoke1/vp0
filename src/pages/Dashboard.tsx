@@ -48,7 +48,7 @@ const Dashboard: React.FC = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <LoadingSpinner size="lg" text="Initializing VPO Dashboard..." variant="crystal" showIcon={true} />
+        <LoadingSpinner size="lg" text="Initializing Veyra Dashboard..." variant="crystal" showIcon={true} />
       </div>
     );
   }

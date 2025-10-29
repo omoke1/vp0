@@ -137,7 +137,7 @@ const EcosystemSection: React.FC = () => {
               </span>
             </h2>
             <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              VPO powers the next generation of decentralized prediction markets, 
+              Veyra powers the next generation of decentralized prediction markets, 
               integrating with leading platforms and cutting-edge technology to deliver 
               <span className="text-blue-600 font-semibold"> verifiable truth</span> at scale.
             </p>
@@ -296,7 +296,7 @@ const EcosystemSection: React.FC = () => {
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm ring-1 ring-black/5 text-sm font-medium text-gray-700 mb-6">
               <CheckCircle className="w-4 h-4" />
-              <span>Why Choose VPO?</span>
+              <span>Why Choose Veyra?</span>
             </div>
             <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
               The Future of <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Prediction Technology</span>

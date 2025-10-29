@@ -1,12 +1,12 @@
 import React, { memo, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppStore } from '../store/useAppStore';
 import { useWeb3 } from '../providers/Web3Provider';
 import { BarChart3, TrendingUp, Cpu, Menu, X, Wallet, AlertCircle, Network } from 'lucide-react';
 import { useState } from 'react';
 
 const AppNavigation: React.FC = () => {
-  const { user, error, clearError } = useAppStore();
+  const { user, error, clearError, launchApp, isAppLaunched } = useAppStore();
   const { 
     isConnected, 
     isConnecting, 
@@ -17,11 +17,12 @@ const AppNavigation: React.FC = () => {
     balance, 
     connect, 
     disconnect, 
-    switchChain,
-    error: web3Error,
+    switchChain, 
+    error: web3Error, 
     clearError: clearWeb3Error 
   } = useWeb3();
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showChainSelector, setShowChainSelector] = useState(false);
 
@@ -71,6 +72,19 @@ const AppNavigation: React.FC = () => {
     }
   }, [switchChain]);
 
+  // Handle Launch App button click
+  const handleLaunchApp = useCallback(async () => {
+    try {
+      console.log('🚀 Veyra Navbar Launch App button clicked');
+      await launchApp();
+      console.log('✅ Veyra Navbar app launch initiated successfully');
+      // Navigate to dashboard after launching the app
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('❌ Veyra Navbar failed to launch app:', error);
+    }
+  }, [launchApp, navigate]);
+
   // Clear any errors
   const handleClearError = useCallback(() => {
     clearError();
@@ -85,17 +99,17 @@ const AppNavigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center">
+          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity duration-200">
             <div className="relative">
               <img 
                 src="/assets/vpo-logo-simple.svg" 
-                alt="VPO Logo" 
+                alt="Veyra Logo" 
                 className="w-8 h-8 mr-3"
               />
               <div className="absolute inset-0 w-8 h-8 mr-3 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse-soft"></div>
             </div>
-            <span className="text-xl font-semibold text-gray-900 font-inter">VPO</span>
-          </div>
+            <span className="text-xl font-semibold text-gray-900 font-inter">Veyra</span>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -116,6 +130,17 @@ const AppNavigation: React.FC = () => {
                 </Link>
               );
             })}
+            
+            {/* Launch App Button */}
+            <button
+              onClick={handleLaunchApp}
+              className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover-lift shadow-lg"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Launch App
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse-soft"></div>
+            </button>
           </div>
 
               {/* Error Display */}
@@ -254,6 +279,17 @@ const AppNavigation: React.FC = () => {
                   </Link>
                 );
               })}
+              
+              {/* Mobile Launch App Button */}
+              <button
+                onClick={() => {
+                  handleLaunchApp();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg"
+              >
+                <span>Launch App</span>
+              </button>
             </div>
           </div>
         )}

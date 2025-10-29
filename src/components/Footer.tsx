@@ -60,15 +60,15 @@ const Footer: React.FC = () => {
       <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         {/* Mobile-first grid layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12">
-          {/* VPO Brand - Full width on mobile, first column on larger screens */}
+          {/* Veyra Brand - Full width on mobile, first column on larger screens */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <img 
                 src="/assets/vpo-logo-simple.svg" 
-                alt="VPO Logo" 
+                alt="Veyra Logo" 
                 className="w-8 h-8 sm:w-10 sm:h-10"
               />
-              <h3 className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">VPO</h3>
+              <h3 className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Veyra</h3>
             </div>
             <p className="text-gray-400 mb-6 text-sm sm:text-base leading-relaxed max-w-sm">
               Verifiable Truth for the Prediction Economy. Built on EigenCloud.
@@ -137,7 +137,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-800 pt-6 sm:pt-8">
           <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:justify-between sm:items-center">
             <p className="text-gray-400 text-sm text-center sm:text-left order-2 sm:order-1">
-              © VPO 2025 — Built on EigenCloud
+              © Veyra 2025 — Built on EigenCloud
             </p>
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 order-1 sm:order-2">
               <div className="flex flex-wrap justify-center sm:justify-end space-x-4 sm:space-x-6">

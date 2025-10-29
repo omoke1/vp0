@@ -1,6 +1,6 @@
-# VPO Landing Page - React TypeScript
+# Veyra App - React TypeScript
 
-A modern, responsive landing page for VPO (Verifiable Truth for the Prediction Economy) built with React, TypeScript, and Tailwind CSS.
+A modern, responsive application for Veyra (Verifiable Truth for the Prediction Economy) built with React, TypeScript, and Tailwind CSS.
 
 ## 🚀 Features
 
@@ -57,7 +57,7 @@ The project uses Tailwind CSS with custom configurations:
 
 - **Custom animations** for smooth interactions
 - **Responsive breakpoints** for mobile-first design
-- **Custom color palette** matching the VPO brand
+- **Custom color palette** matching the Veyra brand
 - **Professional shadows and effects**
 
 ## 📱 Responsive Design
@@ -147,7 +147,7 @@ The built application can be deployed to any static hosting service:
 
 ## 📄 License
 
-This project is proprietary software for VPO.
+This project is proprietary software for Veyra.
 
 ## 🤝 Contributing
 

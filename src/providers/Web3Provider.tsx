@@ -66,9 +66,9 @@ class ConnectionPool {
   }
 
   async closeAllConnections(): Promise<void> {
-    for (const [key, connection] of this.connections) {
+    this.connections.forEach((connection) => {
       connection.destroyed = true;
-    }
+    });
     this.connections.clear();
     this.retryCounts.clear();
     this.lastError.clear();
@@ -123,18 +123,18 @@ export const useWeb3 = () => {
   return context;
 };
 
-// Web3 Provider Component
-interface Web3ProviderProps {
-  children: React.ReactNode;
-  queryClient: QueryClient;
-}
-
-export const Web3Provider: React.FC<Web3ProviderProps> = ({ children, queryClient }) => {
-  const { setUser, setError, clearError, setLoading } = useAppStore();
+// Internal Web3 Provider Component (uses Wagmi hooks)
+const Web3ProviderInternal: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { setUser, setError, clearError, setLoading, user } = useAppStore();
   const [isConnecting, setIsConnecting] = useState(false);
   const [isDisconnecting, setIsDisconnecting] = useState(false);
   const [error, setWeb3Error] = useState<string | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
+
+  // Debug: Log Web3Provider initialization
+  React.useEffect(() => {
+    console.log('🔧 Veyra Web3ProviderInternal initialized');
+  }, []);
 
   const { address, isConnected, chainId } = useAccount();
   const { connect, connectors } = useConnect();
@@ -274,11 +274,13 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children, queryClien
         }
         
         // Update user state with new chain
-        setUser(prev => prev ? {
-          ...prev,
-          chainId: targetChainId,
-          networkName: getNetworkName(targetChainId),
-        } : null);
+        if (user) {
+          setUser({
+            ...user,
+            chainId: targetChainId,
+            networkName: getNetworkName(targetChainId),
+          });
+        }
       });
 
     } catch (error) {
@@ -304,19 +306,23 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children, queryClien
       if (isInitialized) return;
 
       try {
+        // Set initialized immediately to not block app launch
+        setIsInitialized(true);
+        
         // Check if auto-connect is enabled and session exists
         if (sessionManager.shouldAutoConnect()) {
           const session = sessionManager.loadSession();
           if (session) {
             console.log('Auto-connecting to wallet:', session.address);
-            await connectWallet();
+            // Don't await this to avoid blocking app launch
+            connectWallet().catch(error => {
+              console.error('Failed to auto-connect:', error);
+              sessionManager.clearSession();
+            });
           }
         }
       } catch (error) {
-        console.error('Failed to auto-connect:', error);
-        // Clear invalid session
-        sessionManager.clearSession();
-      } finally {
+        console.error('Failed to initialize Web3:', error);
         setIsInitialized(true);
       }
     };
@@ -367,10 +373,24 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children, queryClien
   };
 
   return (
+    <Web3Context.Provider value={contextValue}>
+      {children}
+    </Web3Context.Provider>
+  );
+};
+
+// Main Web3 Provider Component (wraps with WagmiProvider)
+interface Web3ProviderProps {
+  children: React.ReactNode;
+  queryClient: QueryClient;
+}
+
+export const Web3Provider: React.FC<Web3ProviderProps> = ({ children, queryClient }) => {
+  return (
     <WagmiProvider config={config}>
-      <Web3Context.Provider value={contextValue}>
+      <Web3ProviderInternal>
         {children}
-      </Web3Context.Provider>
+      </Web3ProviderInternal>
     </WagmiProvider>
   );
 };

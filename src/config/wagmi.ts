@@ -27,16 +27,10 @@ export const web3Modal = createWeb3Modal({
   projectId,
   themeMode: 'light',
   themeVariables: {
-    '--w3m-z-index': '1000',
+    '--w3m-z-index': 1000,
     '--w3m-accent': '#3b82f6',
     '--w3m-border-radius-master': '12px',
   },
-  enableAnalytics: true,
-  enableOnramp: true,
-  enableNetworkView: true,
-  enableAccountView: true,
-  enableExplorer: true,
-  enableWalletFeatures: true,
 });
 
 // Export configurations from environment

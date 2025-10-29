@@ -9,9 +9,11 @@ const HeroSection: React.FC = () => {
   const handleLaunchApp = async () => {
     setIsLaunching(true);
     try {
+      console.log('🎯 Veyra Launch App button clicked');
       await launchApp();
+      console.log('✅ Veyra app launch initiated successfully');
     } catch (error) {
-      console.error('Failed to launch app:', error);
+      console.error('❌ Failed to launch Veyra app:', error);
     } finally {
       setIsLaunching(false);
     }
@@ -96,10 +98,10 @@ const HeroSection: React.FC = () => {
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 shadow-sm ring-1 ring-black/5 text-xs font-medium text-gray-700 uppercase tracking-wide">
             <img 
               src="/assets/vpo-logo-simple.svg" 
-              alt="VPO Logo" 
+              alt="Veyra Logo" 
               className="w-4 h-4"
             />
-            VPO
+            Veyra
           </span>
         </div>
 

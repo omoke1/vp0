@@ -80,7 +80,7 @@ export class RetryManager {
         // Check if we should retry
         if (attempt < this.options.maxRetries && this.options.retryCondition(error)) {
           const delay = this.calculateDelay(attempt);
-          console.warn(`⚠️ ${context} attempt ${attempt + 1} failed, retrying in ${delay}ms:`, error.message);
+          console.warn(`⚠️ ${context} attempt ${attempt + 1} failed, retrying in ${delay}ms:`, error instanceof Error ? error.message : String(error));
           
           await this.delay(delay);
         } else {
@@ -109,7 +109,7 @@ export class RetryManager {
     );
 
     const successful = results
-      .filter((result): result is PromiseFulfilledResult<T> => result.status === 'fulfilled')
+      .filter((result): result is PromiseFulfilledResult<Awaited<T>> => result.status === 'fulfilled')
       .map(result => result.value);
 
     const failed = results

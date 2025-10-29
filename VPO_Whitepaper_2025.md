@@ -1,4 +1,4 @@
-# VPO: Verifiable Prediction Oracle
+# Veyra: Verifiable Prediction Oracle
 ## A Cryptographic Solution for Trustless Prediction Market Resolution
 
 **Version 1.0**  
@@ -10,9 +10,9 @@
 
 The prediction economy represents one of the most promising applications of decentralized technology, yet it remains fundamentally constrained by the need for human intervention in resolution processes. Current prediction markets face critical challenges including manual resolution delays, human subjectivity and bias, high dispute costs, and inability to leverage AI models for automated decision-making.
 
-VPO (Verifiable Prediction Oracle) introduces a revolutionary approach to prediction market resolution through cryptographic computation and AI-powered decision-making. By combining zero-knowledge proofs, verifiable computation, and advanced AI models, VPO enables automatic, unbiased, and cryptographically verifiable resolution of any prediction market event.
+Veyra (Verifiable Prediction Oracle) introduces a revolutionary approach to prediction market resolution through cryptographic computation and AI-powered decision-making. By combining zero-knowledge proofs, verifiable computation, and advanced AI models, Veyra enables automatic, unbiased, and cryptographically verifiable resolution of any prediction market event.
 
-This whitepaper presents the technical architecture, economic model, and implementation roadmap for VPO, demonstrating how it transforms computation into cryptographic truth and eliminates the trust requirements that currently limit the prediction economy's potential.
+This whitepaper presents the technical architecture, economic model, and implementation roadmap for Veyra, demonstrating how it transforms computation into cryptographic truth and eliminates the trust requirements that currently limit the prediction economy's potential.
 
 ---
 
@@ -42,9 +42,9 @@ The prediction economy has emerged as one of the most transformative application
 
 However, the current prediction economy is fundamentally limited by its reliance on human judgment for resolution. This dependency creates systemic inefficiencies, introduces bias, and prevents the full automation that would unlock the technology's true potential.
 
-### 1.2 The VPO Vision
+### 1.2 The Veyra Vision
 
-VPO envisions a future where prediction markets operate with complete automation, cryptographic verifiability, and zero human bias. By leveraging cutting-edge AI models and zero-knowledge proof systems, VPO transforms any computable prediction into a cryptographically verifiable truth.
+Veyra envisions a future where prediction markets operate with complete automation, cryptographic verifiability, and zero human bias. By leveraging cutting-edge AI models and zero-knowledge proof systems, Veyra transforms any computable prediction into a cryptographically verifiable truth.
 
 Our mission is to eliminate the trust requirements that currently constrain prediction markets, enabling a truly decentralized and automated information economy where computation becomes truth.
 
@@ -94,9 +94,9 @@ These limitations have created a prediction economy that is:
 
 ## 3. Solution Overview
 
-### 3.1 The VPO Approach
+### 3.1 The Veyra Approach
 
-VPO introduces a comprehensive solution that addresses all current limitations through a three-layer architecture:
+Veyra introduces a comprehensive solution that addresses all current limitations through a three-layer architecture:
 
 1. **Data Layer**: Real-time data ingestion and preprocessing
 2. **Computation Layer**: AI-powered analysis and decision-making
@@ -104,7 +104,7 @@ VPO introduces a comprehensive solution that addresses all current limitations t
 
 ### 3.2 Core Innovation
 
-VPO's core innovation lies in its ability to transform any computable prediction into a cryptographically verifiable truth through:
+Veyra's core innovation lies in its ability to transform any computable prediction into a cryptographically verifiable truth through:
 
 - **Automated Data Processing**: Real-time ingestion and analysis of relevant data sources
 - **AI-Powered Resolution**: Advanced machine learning models for event analysis and outcome prediction
@@ -125,11 +125,11 @@ VPO's core innovation lies in its ability to transform any computable prediction
 
 ### 4.1 System Overview
 
-VPO operates as a decentralized oracle network with the following core components:
+Veyra operates as a decentralized oracle network with the following core components:
 
 ```
 ┌─────────────────────┐    ┌─────────────────────┐    ┌─────────────────────┐
-│   Prediction        │    │   VPO Adapter       │    │   EigenCloud        │
+│   Prediction        │    │   Veyra Adapter     │    │   EigenCloud        │
 │   Markets           │◄──►│   Smart             │◄──►│   AI Compute        │
 │   (Polymarket)      │    │   Contracts         │    │   Infrastructure     │
 └─────────────────────┘    └─────────────────────┘    └─────────────────────┘
@@ -143,8 +143,8 @@ VPO operates as a decentralized oracle network with the following core component
 
 ### 4.2 Core Components
 
-#### 4.2.1 VPO Adapter
-The VPO Adapter serves as the integration layer between prediction markets and the VPO network:
+#### 4.2.1 Veyra Adapter
+The Veyra Adapter serves as the integration layer between prediction markets and the Veyra network:
 
 - **Event Detection**: Monitors prediction markets for resolution requests
 - **Data Aggregation**: Collects relevant data from multiple sources
@@ -171,7 +171,7 @@ The blockchain layer provides:
 ### 4.3 Data Flow Architecture
 
 1. **Event Creation**: Prediction market creates resolution request
-2. **Data Collection**: VPO Adapter gathers relevant data from multiple sources
+2. **Data Collection**: Veyra Adapter gathers relevant data from multiple sources
 3. **AI Processing**: EigenCloud executes AI models to analyze data and determine outcome
 4. **Proof Generation**: Cryptographic proof is generated for the resolution decision
 5. **Blockchain Storage**: Proof is stored on blockchain for verification
@@ -184,7 +184,7 @@ The blockchain layer provides:
 
 ### 5.1 Zero-Knowledge Proofs
 
-VPO utilizes zero-knowledge proof systems to enable verifiable computation without revealing sensitive data:
+Veyra utilizes zero-knowledge proof systems to enable verifiable computation without revealing sensitive data:
 
 #### 5.1.1 zk-SNARKs
 - **Succinct**: Proofs are small and can be verified quickly
@@ -200,7 +200,7 @@ VPO utilizes zero-knowledge proof systems to enable verifiable computation witho
 
 ### 5.2 Verifiable Computation
 
-VPO implements verifiable computation protocols that ensure:
+Veyra implements verifiable computation protocols that ensure:
 
 - **Correctness**: AI model execution produces correct results
 - **Completeness**: All valid computations can be proven
@@ -225,7 +225,7 @@ VPO implements verifiable computation protocols that ensure:
 
 ### 6.1 Machine Learning Models
 
-VPO integrates advanced AI models for automated decision-making:
+Veyra integrates advanced AI models for automated decision-making:
 
 #### 6.1.1 Natural Language Processing
 - **Event Classification**: Categorizing prediction market events
@@ -248,7 +248,7 @@ VPO integrates advanced AI models for automated decision-making:
 ### 6.2 Model Architecture
 
 #### 6.2.1 Ensemble Methods
-VPO employs ensemble learning to combine multiple models:
+Veyra employs ensemble learning to combine multiple models:
 
 - **Voting Systems**: Majority or weighted voting across models
 - **Stacking**: Meta-learning to combine model predictions
@@ -283,8 +283,8 @@ Advanced neural networks for complex pattern recognition:
 
 ### 7.1 Token Economics
 
-#### 7.1.1 VPO Token (VPO)
-The VPO token serves as the primary utility and governance token:
+#### 7.1.1 Veyra Token (VYRA)
+The Veyra token serves as the primary utility and governance token:
 
 - **Resolution Fees**: Payment for oracle services
 - **Staking**: Security and participation in the network
@@ -332,7 +332,7 @@ The VPO token serves as the primary utility and governance token:
 
 ### 8.1 AI Model Competitions
 
-VPO enables automated resolution of AI model competitions:
+Veyra enables automated resolution of AI model competitions:
 
 #### 8.1.1 Image Classification
 - **ImageNet Challenges**: Automated accuracy assessment
@@ -354,7 +354,7 @@ VPO enables automated resolution of AI model competitions:
 
 ### 8.2 Risk Assessment
 
-VPO provides verifiable risk scores for various applications:
+Veyra provides verifiable risk scores for various applications:
 
 #### 8.2.1 Financial Services
 - **Credit Scoring**: Automated creditworthiness assessment
@@ -370,7 +370,7 @@ VPO provides verifiable risk scores for various applications:
 
 ### 8.3 Sports and Entertainment
 
-VPO enables automated resolution of sports and entertainment events:
+Veyra enables automated resolution of sports and entertainment events:
 
 #### 8.3.1 Sports Outcomes
 - **Game Results**: Win/loss determination
@@ -386,7 +386,7 @@ VPO enables automated resolution of sports and entertainment events:
 
 ### 8.4 Social and Political Events
 
-VPO provides unbiased resolution for social and political events:
+Veyra provides unbiased resolution for social and political events:
 
 #### 8.4.1 Elections
 - **Vote Counting**: Automated tally verification
@@ -453,7 +453,7 @@ VPO provides unbiased resolution for social and political events:
 ### 10.1 Phase 1: Foundation (Q1 2025)
 
 #### 10.1.1 Core Infrastructure
-- **Smart Contract Development**: VPO core contracts
+- **Smart Contract Development**: Veyra core contracts
 - **Basic Oracle Logic**: Simple resolution mechanisms
 - **Testnet Deployment**: Initial testing environment
 - **Security Audits**: Third-party security review
@@ -482,7 +482,7 @@ VPO provides unbiased resolution for social and political events:
 
 #### 10.3.1 Production Deployment
 - **Mainnet Launch**: Full production deployment
-- **Token Launch**: VPO token distribution
+- **Token Launch**: Veyra token distribution
 - **Governance Activation**: Decentralized governance
 - **Incentive Programs**: Staking and rewards
 
@@ -602,29 +602,29 @@ VPO provides unbiased resolution for social and political events:
 
 ## 13. Conclusion
 
-VPO represents a fundamental advancement in the prediction economy, eliminating the trust requirements that currently limit its potential. By combining cutting-edge AI, cryptographic proofs, and decentralized infrastructure, VPO enables a future where computation becomes truth and prediction markets operate with complete automation and verifiability.
+Veyra represents a fundamental advancement in the prediction economy, eliminating the trust requirements that currently limit its potential. By combining cutting-edge AI, cryptographic proofs, and decentralized infrastructure, Veyra enables a future where computation becomes truth and prediction markets operate with complete automation and verifiability.
 
 The technical architecture presented in this whitepaper provides a robust foundation for building this future, while the economic model ensures sustainable growth and ecosystem development. The implementation roadmap outlines a clear path to deployment, with careful attention to security, scalability, and user experience.
 
-As we move forward, VPO will continue to push the boundaries of what's possible in decentralized prediction markets, enabling new applications and use cases that were previously impossible. The future of the prediction economy is automated, verifiable, and trustless—and VPO is leading the way.
+As we move forward, Veyra will continue to push the boundaries of what's possible in decentralized prediction markets, enabling new applications and use cases that were previously impossible. The future of the prediction economy is automated, verifiable, and trustless—and Veyra is leading the way.
 
 ### 13.1 Call to Action
 
-We invite developers, researchers, and visionaries to join us in building the future of verifiable predictions. Whether through technical contributions, research partnerships, or ecosystem development, there are numerous ways to participate in the VPO revolution.
+We invite developers, researchers, and visionaries to join us in building the future of verifiable predictions. Whether through technical contributions, research partnerships, or ecosystem development, there are numerous ways to participate in the Veyra revolution.
 
-The prediction economy is at an inflection point. The choice is between continued reliance on human judgment and bias, or embracing the automated, verifiable future that VPO enables. We choose the future.
+The prediction economy is at an inflection point. The choice is between continued reliance on human judgment and bias, or embracing the automated, verifiable future that Veyra enables. We choose the future.
 
 ---
 
 **Contact Information:**
-- Website: [vpo.io](https://vpo.io)
-- Email: info@vpo.io
-- Twitter: @VPOracle
-- GitHub: github.com/vpo-protocol
+- Website: [veyra.io](https://veyra.io)
+- Email: info@veyra.io
+- Twitter: @VeyraOracle
+- GitHub: github.com/veyra-protocol
 
 **Disclaimer:**
-This whitepaper is for informational purposes only and does not constitute investment advice. The VPO protocol is experimental software and may contain bugs or vulnerabilities. Users should conduct their own research and due diligence before participating in the VPO ecosystem.
+This whitepaper is for informational purposes only and does not constitute investment advice. The Veyra protocol is experimental software and may contain bugs or vulnerabilities. Users should conduct their own research and due diligence before participating in the Veyra ecosystem.
 
 ---
 
-*© 2025 VPO Protocol. All rights reserved.*
+*© 2025 Veyra Protocol. All rights reserved.*

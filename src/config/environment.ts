@@ -1,17 +1,17 @@
-// Environment configuration for VPO App
+// Environment configuration for Veyra App
 export const environment = {
   // Web3Modal Configuration
   walletConnectProjectId: process.env.REACT_APP_WALLET_CONNECT_PROJECT_ID || 'your-project-id-here',
   
   // Alchemy API Keys (for RPC endpoints)
-  alchemyApiKey: process.env.REACT_APP_ALCHEMY_API_KEY || 'demo',
+  alchemyApiKey: process.env.REACT_APP_ALCHEMY_API_KEY || null,
   
   // Custom RPC URLs (if not using Alchemy)
   rpcUrls: {
-    ethereum: process.env.REACT_APP_ETHEREUM_RPC_URL || `https://eth-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY || 'demo'}`,
-    polygon: process.env.REACT_APP_POLYGON_RPC_URL || `https://polygon-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY || 'demo'}`,
-    arbitrum: process.env.REACT_APP_ARBITRUM_RPC_URL || `https://arb-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY || 'demo'}`,
-    sepolia: process.env.REACT_APP_SEPOLIA_RPC_URL || `https://eth-sepolia.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY || 'demo'}`,
+    ethereum: process.env.REACT_APP_ETHEREUM_RPC_URL || (process.env.REACT_APP_ALCHEMY_API_KEY ? `https://eth-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}` : 'https://cloudflare-eth.com'),
+    polygon: process.env.REACT_APP_POLYGON_RPC_URL || (process.env.REACT_APP_ALCHEMY_API_KEY ? `https://polygon-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}` : 'https://polygon-rpc.com'),
+    arbitrum: process.env.REACT_APP_ARBITRUM_RPC_URL || (process.env.REACT_APP_ALCHEMY_API_KEY ? `https://arb-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}` : 'https://arb1.arbitrum.io/rpc'),
+    sepolia: process.env.REACT_APP_SEPOLIA_RPC_URL || (process.env.REACT_APP_ALCHEMY_API_KEY ? `https://eth-sepolia.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}` : 'https://rpc.sepolia.org'),
   },
   
   // Performance Monitoring

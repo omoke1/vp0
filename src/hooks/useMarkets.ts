@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { PredictionMarket, MarketFilters, MarketSort, MarketStats, UserPortfolio } from '../types/market';
+import { PredictionMarket, MarketFilters, MarketSort, MarketStats, UserPortfolio, MarketCategory } from '../types/market';
 
 // Mock API functions - will be replaced with real API calls
 const mockMarkets: PredictionMarket[] = [
@@ -118,7 +118,7 @@ const mockMarkets: PredictionMarket[] = [
     isResolved: false,
     oracleData: {
       oracleId: 'oracle-4',
-      dataSource: 'VPO-AI',
+      dataSource: 'Veyra-AI',
       lastUpdate: '2024-01-20T13:15:00Z',
       confidence: 0.85,
       status: 'ACTIVE',
@@ -156,7 +156,7 @@ const mockMarkets: PredictionMarket[] = [
     },
     oracleData: {
       oracleId: 'oracle-5',
-      dataSource: 'VPO-AI',
+      dataSource: 'Veyra-AI',
       lastUpdate: '2024-08-12T10:30:00Z',
       confidence: 0.98,
       status: 'ACTIVE',
@@ -310,7 +310,7 @@ export const useMarkets = (filters: MarketFilters = {}, sort: MarketSort = { fie
     queryKey: ['markets', filters, sort],
     queryFn: () => fetchMarkets(filters, sort),
     staleTime: 30000, // 30 seconds
-    cacheTime: 300000, // 5 minutes
+    gcTime: 300000, // 5 minutes (renamed from cacheTime)
   });
 };
 
@@ -319,7 +319,7 @@ export const useMarketStats = () => {
     queryKey: ['market-stats'],
     queryFn: fetchMarketStats,
     staleTime: 60000, // 1 minute
-    cacheTime: 600000, // 10 minutes
+    gcTime: 600000, // 10 minutes (renamed from cacheTime)
   });
 };
 
@@ -328,7 +328,7 @@ export const useUserPortfolio = () => {
     queryKey: ['user-portfolio'],
     queryFn: fetchUserPortfolio,
     staleTime: 30000, // 30 seconds
-    cacheTime: 300000, // 5 minutes
+    gcTime: 300000, // 5 minutes (renamed from cacheTime)
   });
 };
 

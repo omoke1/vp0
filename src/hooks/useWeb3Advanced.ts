@@ -158,10 +158,10 @@ export const useWeb3Advanced = (): Web3AdvancedState => {
     return measureOperation('getTokenInfo', async () => {
       try {
         const calls = [
-          createMulticallCall(tokenAddress, ERC20_ABI, 'symbol', []),
-          createMulticallCall(tokenAddress, ERC20_ABI, 'name', []),
-          createMulticallCall(tokenAddress, ERC20_ABI, 'decimals', []),
-          createMulticallCall(tokenAddress, ERC20_ABI, 'balanceOf', [address]),
+          createMulticallCall(tokenAddress as `0x${string}`, ERC20_ABI, 'symbol', []),
+          createMulticallCall(tokenAddress as `0x${string}`, ERC20_ABI, 'name', []),
+          createMulticallCall(tokenAddress as `0x${string}`, ERC20_ABI, 'decimals', []),
+          createMulticallCall(tokenAddress as `0x${string}`, ERC20_ABI, 'balanceOf', [address as `0x${string}`]),
         ];
 
         const results = await multicallManager.aggregate3(calls, {} as any);
@@ -233,12 +233,12 @@ export const useWeb3Advanced = (): Web3AdvancedState => {
 
   // Auto-refresh balances when connected
   useEffect(() => {
-    if (isConnected && chainId && address) {
+    if (web3.isConnected && chainId && address) {
       refreshBalances();
     } else {
       setTokens([]);
     }
-  }, [isConnected, chainId, address, refreshBalances]);
+  }, [web3.isConnected, chainId, address, refreshBalances]);
 
   // Update performance stats
   useEffect(() => {
@@ -271,7 +271,7 @@ export const useWeb3Advanced = (): Web3AdvancedState => {
     isDisconnecting: web3.isDisconnecting,
     address: web3.address,
     chainId: web3.chainId,
-    ensName: web3.ensName || ensName,
+    ensName: web3.ensName || ensName || undefined,
     
     // Balance information
     nativeBalance: nativeBalance?.formatted,

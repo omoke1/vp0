@@ -81,12 +81,12 @@ const Oracle: React.FC = () => {
         },
         {
           id: '3',
-          name: 'VPO AI Oracle',
+          name: 'Veyra AI Oracle',
           status: 'ACTIVE',
           lastUpdate: new Date(Date.now() - 1 * 60 * 1000).toISOString(),
           confidence: 0.92,
           uptime: 98.8,
-          dataSource: 'VPO-AI',
+          dataSource: 'Veyra-AI',
           resolutionCount: 2100,
           avgResolutionTime: 1.8,
           errorRate: 0.5
@@ -129,7 +129,7 @@ const Oracle: React.FC = () => {
         },
         {
           id: '3',
-          name: 'Custom VPO Model',
+          name: 'Custom Veyra Model',
           version: '2.1',
           status: 'TRAINING',
           accuracy: 0.87,
@@ -149,7 +149,7 @@ const Oracle: React.FC = () => {
           confidence: 0.98,
           resolvedAt: new Date(Date.now() - 2 * 60 * 1000).toISOString(),
           resolutionMethod: 'AI',
-          dataSource: 'VPO-AI'
+          dataSource: 'Veyra-AI'
         },
         {
           id: '2',

@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000, // 5 minutes
-      cacheTime: 10 * 60 * 1000, // 10 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime)
       retry: (failureCount, error) => {
         // Don't retry on 4xx errors
         if (error instanceof Error && 'status' in error && typeof error.status === 'number') {
@@ -44,6 +44,11 @@ const queryClient = new QueryClient({
 const App: React.FC = () => {
   const { isAppLaunched } = useAppStore();
   const { startRender, endRender } = usePerformanceMonitor();
+
+  // Debug: Track isAppLaunched changes
+  React.useEffect(() => {
+    console.log('🔍 Veyra App component - isAppLaunched changed:', isAppLaunched);
+  }, [isAppLaunched]);
 
   // Track render performance
   React.useEffect(() => {
@@ -88,7 +93,7 @@ const App: React.FC = () => {
         {process.env.NODE_ENV === 'development' && (
           <ReactQueryDevtools
             initialIsOpen={false}
-            position="bottom-right"
+            position="bottom"
           />
         )}
       </Web3Provider>

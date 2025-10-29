@@ -54,10 +54,10 @@ const Navigation: React.FC = () => {
           >
             <img 
               src="/assets/vpo-logo-simple.svg" 
-              alt="VPO Logo" 
+              alt="Veyra Logo" 
               className="w-8 h-8 sm:w-10 sm:h-10"
             />
-            <span className="text-lg sm:text-xl font-semibold tracking-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">VPO</span>
+            <span className="text-lg sm:text-xl font-semibold tracking-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Veyra</span>
           </a>
           
           {/* Desktop Menu */}

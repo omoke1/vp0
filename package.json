@@ -1,7 +1,7 @@
 {
-  "name": "vpo-landing-page",
+  "name": "veyra-app",
   "version": "1.0.0",
-  "description": "VPO - Verifiable Truth for the Prediction Economy Landing Page",
+  "description": "Veyra - Verifiable Truth for the Prediction Economy",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.5",
+    "@tanstack/react-query-devtools": "^5.90.2",
     "@types/node": "^16.18.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
