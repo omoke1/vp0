@@ -1,10 +1,20 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Loader2 } from 'lucide-react';
+import { useAppStore } from '../store/useAppStore';
 
 const HeroSection: React.FC = () => {
-  const handleLaunchApp = () => {
-    // Handle launch app action
-    console.log('Launch App clicked');
+  const { launchApp, isLoading } = useAppStore();
+  const [isLaunching, setIsLaunching] = useState(false);
+
+  const handleLaunchApp = async () => {
+    setIsLaunching(true);
+    try {
+      await launchApp();
+    } catch (error) {
+      console.error('Failed to launch app:', error);
+    } finally {
+      setIsLaunching(false);
+    }
   };
 
   const handleReadWhitepaper = () => {
@@ -109,12 +119,17 @@ const HeroSection: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-3 mt-6 items-center justify-center max-w-md sm:max-w-none mx-auto">
           <button 
             onClick={handleLaunchApp}
-            className="relative inline-flex items-center justify-center gap-2 overflow-hidden transition-all duration-300 hover:ring-sky-400/60 hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_40px_80px_rgba(56,189,248,0.18)] group ring-[#ffffff]/30 ring-1 text-sm sm:text-base font-semibold text-white tracking-tight bg-neutral-950/95 rounded-full pt-3 pr-6 pb-3 pl-6 shadow-[0_0_0_1px_rgba(56,189,248,0.25),inset_0_0_0_1px_rgba(255,255,255,0.08)] w-full sm:w-auto"
+            disabled={isLaunching || isLoading}
+            className="relative inline-flex items-center justify-center gap-2 overflow-hidden transition-all duration-300 hover:ring-sky-400/60 hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_40px_80px_rgba(56,189,248,0.18)] group ring-[#ffffff]/30 ring-1 text-sm sm:text-base font-semibold text-white tracking-tight bg-neutral-950/95 rounded-full pt-3 pr-6 pb-3 pl-6 shadow-[0_0_0_1px_rgba(56,189,248,0.25),inset_0_0_0_1px_rgba(255,255,255,0.08)] w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span className="relative z-[1] group-hover:translate-x-1 transition-transform duration-300">
-              Launch App
+              {isLaunching ? 'Launching...' : 'Launch App'}
             </span>
-            <ArrowRight className="relative z-[1] w-4 h-4 text-sky-100 group-hover:translate-x-2 transition-transform duration-300" />
+            {isLaunching ? (
+              <Loader2 className="relative z-[1] w-4 h-4 text-sky-100 animate-spin" />
+            ) : (
+              <ArrowRight className="relative z-[1] w-4 h-4 text-sky-100 group-hover:translate-x-2 transition-transform duration-300" />
+            )}
             <span 
               className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
               style={{

@@ -48,14 +48,17 @@ const Navigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
-          <div className="animate-slide-in-down flex space-x-3 items-center">
+          <a 
+            href="/" 
+            className="animate-slide-in-down flex space-x-3 items-center hover:opacity-80 transition-opacity"
+          >
             <img 
               src="/assets/vpo-logo-simple.svg" 
               alt="VPO Logo" 
               className="w-8 h-8 sm:w-10 sm:h-10"
             />
             <span className="text-lg sm:text-xl font-semibold tracking-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">VPO</span>
-          </div>
+          </a>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
@@ -82,14 +85,6 @@ const Navigation: React.FC = () => {
               className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
             >
               Docs
-            </a>
-            <a 
-              href="/whitepaper.html" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              Whitepaper
             </a>
             <a 
               href="#" 
@@ -167,14 +162,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-sm font-medium"
           >
             Docs
-          </a>
-          <a 
-            href="/whitepaper.html" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-sm font-medium"
-          >
-            Whitepaper
           </a>
           <a 
             href="#" 
