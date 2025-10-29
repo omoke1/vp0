@@ -8,8 +8,8 @@ const HeroSection: React.FC = () => {
   };
 
   const handleReadWhitepaper = () => {
-    // Handle read whitepaper action
-    console.log('Read Whitepaper clicked');
+    // Open whitepaper in new tab
+    window.open('/whitepaper.html', '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -77,6 +77,7 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
       </div>
+
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col items-center justify-center h-full">

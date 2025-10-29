@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPO Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-gray-200/60 bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex space-x-3 items-center">
+                    <img src="/assets/vpo-logo-simple.svg" alt="VPO Logo" class="w-10 h-10">
+                    <span class="text-xl font-semibold tracking-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">VPO</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">← Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    VPO Documentation
+                </h1>
+                <p class="text-xl text-gray-600 mb-12">
+                    Comprehensive guide to the Verifiable Prediction Oracle platform
+                </p>
+
+                <!-- Quick Start -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Quick Start</h2>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Getting Started with VPO</h3>
+                        <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                            <li>Connect your wallet to the VPO platform</li>
+                            <li>Choose a prediction market to participate in</li>
+                            <li>Place your prediction with confidence</li>
+                            <li>Monitor real-time market updates</li>
+                            <li>Collect rewards when your predictions are correct</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- API Reference -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">API Reference</h2>
+                    <div class="space-y-6">
+                        <div class="border border-gray-200 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Authentication</h3>
+                            <p class="text-gray-600 mb-4">All API requests require authentication using your API key.</p>
+                            <div class="bg-gray-900 rounded-lg p-4">
+                                <code class="text-green-400">curl -H "Authorization: Bearer YOUR_API_KEY" https://api.vpo.com/v1/predictions</code>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Get Predictions</h3>
+                            <p class="text-gray-600 mb-4">Retrieve available prediction markets.</p>
+                            <div class="bg-gray-900 rounded-lg p-4">
+                                <code class="text-green-400">GET /api/v1/predictions</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Integration Guides -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Integration Guides</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Web3 Integration</h3>
+                            <p class="text-gray-600 mb-4">Connect VPO to your Web3 application</p>
+                            <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">View Guide →</a>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Oracle Integration</h3>
+                            <p class="text-gray-600 mb-4">Integrate with Chainlink and other oracles</p>
+                            <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">View Guide →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Support -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Support</h2>
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Need Help?</h3>
+                        <p class="text-gray-600 mb-4">Our team is here to help you get started with VPO.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="mailto:support@vpo.com" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors text-center">
+                                Contact Support
+                            </a>
+                            <a href="https://discord.gg/vpo" class="bg-gray-200 text-gray-900 px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors text-center">
+                                Join Discord
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
