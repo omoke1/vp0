@@ -1,13 +1,29 @@
 import React, { memo, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAppStore } from '../store/useAppStore';
-import { BarChart3, TrendingUp, Cpu, Menu, X, Wallet, AlertCircle } from 'lucide-react';
+import { useWeb3 } from '../providers/Web3Provider';
+import { BarChart3, TrendingUp, Cpu, Menu, X, Wallet, AlertCircle, Network } from 'lucide-react';
 import { useState } from 'react';
 
 const AppNavigation: React.FC = () => {
-  const { user, disconnectWallet, connectWallet, isWalletConnecting, error, clearError } = useAppStore();
+  const { user, error, clearError } = useAppStore();
+  const { 
+    isConnected, 
+    isConnecting, 
+    isDisconnecting, 
+    address, 
+    chainId, 
+    ensName, 
+    balance, 
+    connect, 
+    disconnect, 
+    switchChain,
+    error: web3Error,
+    clearError: clearWeb3Error 
+  } = useWeb3();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showChainSelector, setShowChainSelector] = useState(false);
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
@@ -17,18 +33,52 @@ const AppNavigation: React.FC = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
+  // Chain options
+  const chainOptions = [
+    { id: 1, name: 'Ethereum', symbol: 'ETH' },
+    { id: 137, name: 'Polygon', symbol: 'MATIC' },
+    { id: 42161, name: 'Arbitrum', symbol: 'ETH' },
+    { id: 11155111, name: 'Sepolia', symbol: 'ETH' },
+  ];
+
+  const getChainName = (chainId?: number) => {
+    return chainOptions.find(chain => chain.id === chainId)?.name || 'Unknown';
+  };
+
   const handleConnectWallet = useCallback(async () => {
     try {
-      await connectWallet();
+      await connect();
     } catch (error) {
       console.error('Wallet connection failed:', error);
     }
-  }, [connectWallet]);
+  }, [connect]);
 
-  const handleDisconnectWallet = useCallback(() => {
-    disconnectWallet();
-    setIsMobileMenuOpen(false);
-  }, [disconnectWallet]);
+  const handleDisconnectWallet = useCallback(async () => {
+    try {
+      await disconnect();
+      setIsMobileMenuOpen(false);
+    } catch (error) {
+      console.error('Wallet disconnection failed:', error);
+    }
+  }, [disconnect]);
+
+  const handleSwitchChain = useCallback(async (targetChainId: number) => {
+    try {
+      await switchChain(targetChainId);
+      setShowChainSelector(false);
+    } catch (error) {
+      console.error('Chain switch failed:', error);
+    }
+  }, [switchChain]);
+
+  // Clear any errors
+  const handleClearError = useCallback(() => {
+    clearError();
+    clearWeb3Error();
+  }, [clearError, clearWeb3Error]);
+
+  // Get current error (prioritize Web3 errors)
+  const currentError = web3Error || error;
 
   return (
     <nav className="bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200/50">
@@ -68,50 +118,95 @@ const AppNavigation: React.FC = () => {
             })}
           </div>
 
-          {/* Error Display */}
-          {error && (
-            <div className="flex items-center space-x-2 mr-4">
-              <AlertCircle className="w-4 h-4 text-red-500" />
-              <span className="text-sm text-red-600 font-inter">{error}</span>
-              <button
-                onClick={clearError}
-                className="text-red-500 hover:text-red-700 transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-          )}
+              {/* Error Display */}
+              {currentError && (
+                <div className="flex items-center space-x-2 mr-4">
+                  <AlertCircle className="w-4 h-4 text-red-500" />
+                  <span className="text-sm text-red-600 font-inter">{currentError}</span>
+                  <button
+                    onClick={handleClearError}
+                    className="text-red-500 hover:text-red-700 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
 
           {/* User Menu */}
           <div className="flex items-center space-x-4">
-            {user ? (
+            {isConnected ? (
               <div className="flex items-center space-x-3">
-                <div className="text-sm text-gray-600 font-inter">
-                  {user.ensName || `${user.address.slice(0, 6)}...${user.address.slice(-4)}`}
+                {/* Chain Selector */}
+                <div className="relative">
+                  <button
+                    onClick={() => setShowChainSelector(!showChainSelector)}
+                    className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+                  >
+                    <Network className="w-4 h-4" />
+                    <span className="text-sm font-medium text-gray-700">
+                      {getChainName(chainId)}
+                    </span>
+                  </button>
+                  
+                  {showChainSelector && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                      {chainOptions.map((chain) => (
+                        <button
+                          key={chain.id}
+                          onClick={() => handleSwitchChain(chain.id)}
+                          className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors ${
+                            chainId === chain.id ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span>{chain.name}</span>
+                            <span className="text-xs text-gray-500">{chain.symbol}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
+
+                {/* User Info */}
+                <div className="text-sm text-gray-600 font-inter">
+                  {ensName || `${address?.slice(0, 6)}...${address?.slice(-4)}`}
+                </div>
+                
+                {/* Balance */}
+                {balance && (
+                  <div className="text-sm text-gray-500 font-inter">
+                    {balance}
+                  </div>
+                )}
+
+                {/* Avatar */}
                 <div className="relative w-8 h-8 rounded-full overflow-hidden">
                   <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
                     <span className="text-sm font-medium text-white">
-                      {user.address.slice(2, 4).toUpperCase()}
+                      {address?.slice(2, 4).toUpperCase()}
                     </span>
                   </div>
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-500/20 animate-pulse-soft"></div>
                 </div>
+
+                {/* Disconnect Button */}
                 <button
                   onClick={handleDisconnectWallet}
-                  className="text-sm text-gray-500 hover:text-gray-700 transition-colors font-inter"
+                  disabled={isDisconnecting}
+                  className="text-sm text-gray-500 hover:text-gray-700 transition-colors font-inter disabled:opacity-50"
                 >
-                  Disconnect
+                  {isDisconnecting ? 'Disconnecting...' : 'Disconnect'}
                 </button>
               </div>
             ) : (
-              <button 
+              <button
                 onClick={handleConnectWallet}
-                disabled={isWalletConnecting}
+                disabled={isConnecting}
                 className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover-lift shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  {isWalletConnecting ? (
+                  {isConnecting ? (
                     <>
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                       Connecting...

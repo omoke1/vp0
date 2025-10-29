@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './styles/index.css';
 import { useAppStore } from './store/useAppStore';
 import { usePerformanceMonitor } from './hooks/usePerformanceMonitor';
+import { Web3Provider } from './providers/Web3Provider';
 import AppRouter from './components/AppRouter';
 import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
@@ -52,43 +53,45 @@ const App: React.FC = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* If app is launched, show the router (dashboard, markets, etc.) */}
-      {isAppLaunched ? (
-        <AppRouter />
-      ) : (
-        /* Otherwise, show the landing page */
-        <div className="bg-white text-gray-900 antialiased selection:bg-blue-200 selection:text-blue-900">
-          {/* Video Background */}
-          <div className="video-background-container top-0 w-full -z-10 absolute h-screen">
-            <video 
-              src="https://cdn.midjourney.com/video/af6b100b-cd15-4257-b845-8a5388a23f1b/3.mp4" 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="w-full h-full object-cover"
-            />
+      <Web3Provider queryClient={queryClient}>
+        {/* If app is launched, show the router (dashboard, markets, etc.) */}
+        {isAppLaunched ? (
+          <AppRouter />
+        ) : (
+          /* Otherwise, show the landing page */
+          <div className="bg-white text-gray-900 antialiased selection:bg-blue-200 selection:text-blue-900">
+            {/* Video Background */}
+            <div className="video-background-container top-0 w-full -z-10 absolute h-screen">
+              <video
+                src="https://cdn.midjourney.com/video/af6b100b-cd15-4257-b845-8a5388a23f1b/3.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <Navigation />
+            <HeroSection />
+            <ProblemSection />
+            <SolutionSection />
+            <HowItWorksSection />
+            <IntegrationSection />
+            <UseCasesSection />
+            <EcosystemSection />
+            <Footer />
           </div>
-          
-          <Navigation />
-          <HeroSection />
-          <ProblemSection />
-          <SolutionSection />
-          <HowItWorksSection />
-          <IntegrationSection />
-          <UseCasesSection />
-          <EcosystemSection />
-          <Footer />
-        </div>
-      )}
-      
-      {/* React Query DevTools - only in development */}
-      {process.env.NODE_ENV === 'development' && (
-        <ReactQueryDevtools 
-          initialIsOpen={false}
-          position="bottom-right"
-        />
-      )}
+        )}
+
+        {/* React Query DevTools - only in development */}
+        {process.env.NODE_ENV === 'development' && (
+          <ReactQueryDevtools
+            initialIsOpen={false}
+            position="bottom-right"
+          />
+        )}
+      </Web3Provider>
     </QueryClientProvider>
   );
 };
