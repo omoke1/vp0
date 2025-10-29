@@ -48,9 +48,17 @@ const Navigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
-          <div className="animate-slide-in-down flex space-x-3 items-center">
-            <span className="text-lg sm:text-xl font-semibold tracking-tight">VPO</span>
-          </div>
+          <a 
+            href="/" 
+            className="animate-slide-in-down flex space-x-3 items-center hover:opacity-80 transition-opacity"
+          >
+            <img 
+              src="/assets/vpo-logo-simple.svg" 
+              alt="Veyra Logo" 
+              className="w-8 h-8 sm:w-10 sm:h-10"
+            />
+            <span className="text-lg sm:text-xl font-semibold tracking-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Veyra</span>
+          </a>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
@@ -72,12 +80,18 @@ const Navigation: React.FC = () => {
           
           {/* Desktop CTA */}
           <div className="animate-slide-in-down delay-500 hidden sm:flex items-center space-x-3">
-            <button className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+            <a 
+              href="/docs.html" 
+              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+            >
               Docs
-            </button>
-            <button className="cursor-pointer inline-flex flex-col leading-none outline-none overflow-hidden no-underline align-baseline whitespace-nowrap select-none transition-all duration-150 hover:opacity-85 focus:outline-none focus:ring-4 focus:ring-black/50 h-10 sm:h-12 text-sm sm:text-lg text-white text-center bg-gradient-to-b from-neutral-700 to-neutral-900 border-0 rounded-xl pt-2 sm:pt-3 pr-6 sm:pr-8 pb-2 sm:pb-3 pl-6 sm:pl-8 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] items-center justify-center hover-lift">
+            </a>
+            <a 
+              href="#" 
+              className="cursor-pointer inline-flex flex-col leading-none outline-none overflow-hidden no-underline align-baseline whitespace-nowrap select-none transition-all duration-150 hover:opacity-85 focus:outline-none focus:ring-4 focus:ring-black/50 h-10 sm:h-12 text-sm sm:text-lg text-white text-center bg-gradient-to-b from-neutral-700 to-neutral-900 border-0 rounded-xl pt-2 sm:pt-3 pr-6 sm:pr-8 pb-2 sm:pb-3 pl-6 sm:pl-8 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] items-center justify-center hover-lift"
+            >
               Launch App
-            </button>
+            </a>
           </div>
           
           {/* Mobile menu button */}
@@ -143,10 +157,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
           </a>
         ))}
         <div className="border-t border-gray-200 pt-4 pb-3">
-          <a href="#" className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-sm font-medium">
+          <a 
+            href="/docs.html" 
+            className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-sm font-medium"
+          >
             Docs
           </a>
-          <a href="#" className="bg-gradient-to-b from-neutral-700 to-neutral-900 text-white block px-3 py-2 rounded-lg text-sm font-medium hover:opacity-85 mt-2">
+          <a 
+            href="#" 
+            className="bg-gradient-to-b from-neutral-700 to-neutral-900 text-white block px-3 py-2 rounded-lg text-sm font-medium hover:opacity-85 mt-2"
+          >
             Launch App
           </a>
         </div>

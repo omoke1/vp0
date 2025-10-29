@@ -1,0 +1,324 @@
+import React, { memo, useCallback } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAppStore } from '../store/useAppStore';
+import { useWeb3 } from '../providers/Web3Provider';
+import { BarChart3, TrendingUp, Cpu, Menu, X, Wallet, AlertCircle, Network } from 'lucide-react';
+import { useState } from 'react';
+
+const AppNavigation: React.FC = () => {
+  const { user, error, clearError, launchApp, isAppLaunched } = useAppStore();
+  const { 
+    isConnected, 
+    isConnecting, 
+    isDisconnecting, 
+    address, 
+    chainId, 
+    ensName, 
+    balance, 
+    connect, 
+    disconnect, 
+    switchChain, 
+    error: web3Error, 
+    clearError: clearWeb3Error 
+  } = useWeb3();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showChainSelector, setShowChainSelector] = useState(false);
+
+  const navigation = [
+    { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
+    { name: 'Markets', href: '/markets', icon: TrendingUp },
+    { name: 'Oracle', href: '/oracle', icon: Cpu },
+  ];
+
+  const isActive = (path: string) => location.pathname === path;
+
+  // Chain options
+  const chainOptions = [
+    { id: 1, name: 'Ethereum', symbol: 'ETH' },
+    { id: 137, name: 'Polygon', symbol: 'MATIC' },
+    { id: 42161, name: 'Arbitrum', symbol: 'ETH' },
+    { id: 11155111, name: 'Sepolia', symbol: 'ETH' },
+    { id: 40, name: 'Telos EVM', symbol: 'TLOS' },
+  ];
+
+  const getChainName = (chainId?: number) => {
+    return chainOptions.find(chain => chain.id === chainId)?.name || 'Unknown';
+  };
+
+  const handleConnectWallet = useCallback(async () => {
+    try {
+      await connect();
+    } catch (error) {
+      console.error('Wallet connection failed:', error);
+    }
+  }, [connect]);
+
+  const handleDisconnectWallet = useCallback(async () => {
+    try {
+      await disconnect();
+      setIsMobileMenuOpen(false);
+    } catch (error) {
+      console.error('Wallet disconnection failed:', error);
+    }
+  }, [disconnect]);
+
+  const handleSwitchChain = useCallback(async (targetChainId: number) => {
+    try {
+      await switchChain(targetChainId);
+      setShowChainSelector(false);
+    } catch (error) {
+      console.error('Chain switch failed:', error);
+    }
+  }, [switchChain]);
+
+  // Handle Launch App button click
+  const handleLaunchApp = useCallback(async () => {
+    try {
+      console.log('🚀 Veyra Navbar Launch App button clicked');
+      await launchApp();
+      console.log('✅ Veyra Navbar app launch initiated successfully');
+      // Navigate to dashboard after launching the app
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('❌ Veyra Navbar failed to launch app:', error);
+    }
+  }, [launchApp, navigate]);
+
+  // Clear any errors
+  const handleClearError = useCallback(() => {
+    clearError();
+    clearWeb3Error();
+  }, [clearError, clearWeb3Error]);
+
+  // Get current error (prioritize Web3 errors)
+  const currentError = web3Error || error;
+
+  return (
+    <nav className="bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity duration-200">
+            <div className="relative">
+              <img 
+                src="/assets/vpo-logo-simple.svg" 
+                alt="Veyra Logo" 
+                className="w-8 h-8 mr-3"
+              />
+              <div className="absolute inset-0 w-8 h-8 mr-3 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse-soft"></div>
+            </div>
+            <span className="text-xl font-semibold text-gray-900 font-inter">Veyra</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover-lift ${
+                    isActive(item.href)
+                      ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-700 shadow-sm ring-1 ring-blue-200/50'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-white/50 hover:shadow-sm'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{item.name}</span>
+                </Link>
+              );
+            })}
+            
+            {/* Launch App Button */}
+            <button
+              onClick={handleLaunchApp}
+              className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover-lift shadow-lg"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Launch App
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse-soft"></div>
+            </button>
+          </div>
+
+              {/* Error Display */}
+              {currentError && (
+                <div className="flex items-center space-x-2 mr-4">
+                  <AlertCircle className="w-4 h-4 text-red-500" />
+                  <span className="text-sm text-red-600 font-inter">{currentError}</span>
+                  <button
+                    onClick={handleClearError}
+                    className="text-red-500 hover:text-red-700 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+
+          {/* User Menu */}
+          <div className="flex items-center space-x-4">
+            {isConnected ? (
+              <div className="flex items-center space-x-3">
+                {/* Wallet Status Card */}
+                <div className="relative group">
+                  <div className="flex items-center space-x-3 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200/50 hover:shadow-lg transition-all duration-300">
+                    {/* Network Status */}
+                    <div className="flex items-center space-x-2">
+                      <div className="relative">
+                        <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+                        <div className="absolute inset-0 w-3 h-3 rounded-full bg-green-400/30 animate-ping"></div>
+                      </div>
+                      <span className="text-xs font-medium text-gray-600">
+                        {getChainName(chainId)}
+                      </span>
+                    </div>
+
+                    {/* User Address */}
+                    <div className="flex items-center space-x-2">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                        <span className="text-xs font-bold text-white">
+                          {address?.slice(2, 4).toUpperCase()}
+                        </span>
+                      </div>
+                      <span className="text-sm font-medium text-gray-700">
+                        {ensName || `${address?.slice(0, 6)}...${address?.slice(-4)}`}
+                      </span>
+                    </div>
+
+                    {/* Balance */}
+                    {balance && (
+                      <div className="text-sm font-semibold text-gray-800">
+                        {balance}
+                      </div>
+                    )}
+
+                    {/* Chain Selector Dropdown */}
+                    <div className="relative">
+                      <button
+                        onClick={() => setShowChainSelector(!showChainSelector)}
+                        className="p-1 rounded-lg hover:bg-white/50 transition-colors"
+                      >
+                        <Network className="w-4 h-4 text-gray-500" />
+                      </button>
+                      
+                      {showChainSelector && (
+                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50">
+                          <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                            Switch Network
+                          </div>
+                          {chainOptions.map((chain) => (
+                            <button
+                              key={chain.id}
+                              onClick={() => handleSwitchChain(chain.id)}
+                              className={`w-full text-left px-4 py-3 text-sm hover:bg-gray-50 transition-colors ${
+                                chainId === chain.id ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                              }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="font-medium">{chain.name}</span>
+                                <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                                  {chain.symbol}
+                                </span>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Disconnect Button */}
+                    <button
+                      onClick={handleDisconnectWallet}
+                      disabled={isDisconnecting}
+                      className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all duration-200 disabled:opacity-50"
+                      title="Disconnect Wallet"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                  
+                  {/* Hover Tooltip */}
+                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                    {ensName || `${address?.slice(0, 6)}...${address?.slice(-4)}`}
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-900"></div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={handleConnectWallet}
+                disabled={isConnecting}
+                className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover-lift shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  {isConnecting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      Connecting...
+                    </>
+                  ) : (
+                    <>
+                      <Wallet className="w-4 h-4" />
+                      Connect Wallet
+                    </>
+                  )}
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse-soft"></div>
+              </button>
+            )}
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-200 py-4">
+            <div className="space-y-2">
+              {navigation.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      isActive(item.href)
+                        ? 'bg-blue-100 text-blue-700'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+              
+              {/* Mobile Launch App Button */}
+              <button
+                onClick={() => {
+                  handleLaunchApp();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg"
+              >
+                <span>Launch App</span>
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default memo(AppNavigation);

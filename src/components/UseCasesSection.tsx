@@ -77,7 +77,7 @@ const UseCasesSection: React.FC = () => {
             Example <span className="text-gradient">Use Cases</span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4 sm:px-0">
-            VPO enables verifiable resolution for a wide range of prediction market scenarios
+            Veyra enables verifiable resolution for a wide range of prediction market scenarios
           </p>
         </div>
         

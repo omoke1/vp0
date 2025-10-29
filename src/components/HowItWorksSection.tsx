@@ -13,8 +13,8 @@ const HowItWorksSection: React.FC = () => {
     },
     {
       id: 2,
-      title: 'VPO Adapter Fetches Job',
-      description: 'VPO automatically detects and processes resolution requests.',
+      title: 'Veyra Adapter Fetches Job',
+      description: 'Veyra automatically detects and processes resolution requests.',
       icon: 'download',
       color: 'text-green-600'
     },
@@ -66,7 +66,7 @@ const HowItWorksSection: React.FC = () => {
           </p>
         </div>
         
-        {/* VPO Workflow Steps */}
+        {/* Veyra Workflow Steps */}
         <div className="grid gap-4 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {workflowSteps.map((step) => (
             <WorkflowStepCard key={step.id} step={step} getIcon={getIcon} />

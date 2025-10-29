@@ -1,19 +1,31 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Loader2 } from 'lucide-react';
+import { useAppStore } from '../store/useAppStore';
 
 const HeroSection: React.FC = () => {
-  const handleLaunchApp = () => {
-    // Handle launch app action
-    console.log('Launch App clicked');
+  const { launchApp, isLoading } = useAppStore();
+  const [isLaunching, setIsLaunching] = useState(false);
+
+  const handleLaunchApp = async () => {
+    setIsLaunching(true);
+    try {
+      console.log('🎯 Veyra Launch App button clicked');
+      await launchApp();
+      console.log('✅ Veyra app launch initiated successfully');
+    } catch (error) {
+      console.error('❌ Failed to launch Veyra app:', error);
+    } finally {
+      setIsLaunching(false);
+    }
   };
 
   const handleReadWhitepaper = () => {
-    // Handle read whitepaper action
-    console.log('Read Whitepaper clicked');
+    // Open whitepaper in new tab
+    window.open('/whitepaper.html', '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <section className="relative pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 overflow-hidden">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 flex items-center justify-center" style={{ isolation: 'isolate' }}>
         
@@ -78,15 +90,18 @@ const HeroSection: React.FC = () => {
         </div>
       </div>
 
+
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6">
+      <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col items-center justify-center h-full">
         {/* Brand */}
         <div className="animate-fade-in-up mb-4 sm:mb-6">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 shadow-sm ring-1 ring-black/5 text-xs font-medium text-gray-700 uppercase tracking-wide">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
-            VPO
+            <img 
+              src="/assets/vpo-logo-simple.svg" 
+              alt="Veyra Logo" 
+              className="w-4 h-4"
+            />
+            Veyra
           </span>
         </div>
 
@@ -106,12 +121,17 @@ const HeroSection: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-3 mt-6 items-center justify-center max-w-md sm:max-w-none mx-auto">
           <button 
             onClick={handleLaunchApp}
-            className="relative inline-flex items-center justify-center gap-2 overflow-hidden transition-all duration-300 hover:ring-sky-400/60 hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_40px_80px_rgba(56,189,248,0.18)] group ring-[#ffffff]/30 ring-1 text-sm sm:text-base font-semibold text-white tracking-tight bg-neutral-950/95 rounded-full pt-3 pr-6 pb-3 pl-6 shadow-[0_0_0_1px_rgba(56,189,248,0.25),inset_0_0_0_1px_rgba(255,255,255,0.08)] w-full sm:w-auto"
+            disabled={isLaunching || isLoading}
+            className="relative inline-flex items-center justify-center gap-2 overflow-hidden transition-all duration-300 hover:ring-sky-400/60 hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_40px_80px_rgba(56,189,248,0.18)] group ring-[#ffffff]/30 ring-1 text-sm sm:text-base font-semibold text-white tracking-tight bg-neutral-950/95 rounded-full pt-3 pr-6 pb-3 pl-6 shadow-[0_0_0_1px_rgba(56,189,248,0.25),inset_0_0_0_1px_rgba(255,255,255,0.08)] w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span className="relative z-[1] group-hover:translate-x-1 transition-transform duration-300">
-              Launch App
+              {isLaunching ? 'Launching...' : 'Launch App'}
             </span>
-            <ArrowRight className="relative z-[1] w-4 h-4 text-sky-100 group-hover:translate-x-2 transition-transform duration-300" />
+            {isLaunching ? (
+              <Loader2 className="relative z-[1] w-4 h-4 text-sky-100 animate-spin" />
+            ) : (
+              <ArrowRight className="relative z-[1] w-4 h-4 text-sky-100 group-hover:translate-x-2 transition-transform duration-300" />
+            )}
             <span 
               className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
               style={{
