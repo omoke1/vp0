@@ -7,6 +7,7 @@ import SolutionSection from './components/SolutionSection';
 import HowItWorksSection from './components/HowItWorksSection';
 import IntegrationSection from './components/IntegrationSection';
 import UseCasesSection from './components/UseCasesSection';
+import EcosystemSection from './components/EcosystemSection';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
@@ -31,6 +32,7 @@ const App: React.FC = () => {
       <HowItWorksSection />
       <IntegrationSection />
       <UseCasesSection />
+      <EcosystemSection />
       <Footer />
     </div>
   );
