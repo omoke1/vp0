@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './styles/index.css';
@@ -8,13 +8,16 @@ import { Web3Provider } from './providers/Web3Provider';
 import AppRouter from './components/AppRouter';
 import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
-import ProblemSection from './components/ProblemSection';
-import SolutionSection from './components/SolutionSection';
-import HowItWorksSection from './components/HowItWorksSection';
-import IntegrationSection from './components/IntegrationSection';
-import UseCasesSection from './components/UseCasesSection';
-import EcosystemSection from './components/EcosystemSection';
-import Footer from './components/Footer';
+import LoadingSpinner from './components/LoadingSpinner';
+
+// Lazy load heavy components for better code splitting
+const ProblemSection = React.lazy(() => import('./components/ProblemSection'));
+const SolutionSection = React.lazy(() => import('./components/SolutionSection'));
+const HowItWorksSection = React.lazy(() => import('./components/HowItWorksSection'));
+const IntegrationSection = React.lazy(() => import('./components/IntegrationSection'));
+const UseCasesSection = React.lazy(() => import('./components/UseCasesSection'));
+const EcosystemSection = React.lazy(() => import('./components/EcosystemSection'));
+const Footer = React.lazy(() => import('./components/Footer'));
 
 // Create a client for React Query with optimized defaults
 const queryClient = new QueryClient({
@@ -45,9 +48,11 @@ const App: React.FC = () => {
   const { isAppLaunched } = useAppStore();
   const { startRender, endRender } = usePerformanceMonitor();
 
-  // Debug: Track isAppLaunched changes
+  // Track isAppLaunched changes for debugging
   React.useEffect(() => {
-    console.log('🔍 Veyra App component - isAppLaunched changed:', isAppLaunched);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🔍 Veyra App component - isAppLaunched changed:', isAppLaunched);
+    }
   }, [isAppLaunched]);
 
   // Track render performance
@@ -79,13 +84,35 @@ const App: React.FC = () => {
 
             <Navigation />
             <HeroSection />
-            <ProblemSection />
-            <SolutionSection />
-            <HowItWorksSection />
-            <IntegrationSection />
-            <UseCasesSection />
-            <EcosystemSection />
-            <Footer />
+            
+            {/* Lazy loaded sections with Suspense */}
+            <Suspense fallback={<LoadingSpinner size="md" text="Loading content..." variant="crystal" />}>
+              <ProblemSection />
+            </Suspense>
+            
+            <Suspense fallback={<LoadingSpinner size="md" text="Loading content..." variant="crystal" />}>
+              <SolutionSection />
+            </Suspense>
+            
+            <Suspense fallback={<LoadingSpinner size="md" text="Loading content..." variant="crystal" />}>
+              <HowItWorksSection />
+            </Suspense>
+            
+            <Suspense fallback={<LoadingSpinner size="md" text="Loading content..." variant="crystal" />}>
+              <IntegrationSection />
+            </Suspense>
+            
+            <Suspense fallback={<LoadingSpinner size="md" text="Loading content..." variant="crystal" />}>
+              <UseCasesSection />
+            </Suspense>
+            
+            <Suspense fallback={<LoadingSpinner size="md" text="Loading content..." variant="crystal" />}>
+              <EcosystemSection />
+            </Suspense>
+            
+            <Suspense fallback={<LoadingSpinner size="md" text="Loading content..." variant="crystal" />}>
+              <Footer />
+            </Suspense>
           </div>
         )}
 

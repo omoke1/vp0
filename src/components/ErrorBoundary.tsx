@@ -29,7 +29,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     
     // Log error to external service in production
     if (process.env.NODE_ENV === 'production') {
-      // TODO: Implement error reporting service
+      // Error reporting service can be integrated here
       console.error('Error details:', {
         message: error.message,
         stack: error.stack,

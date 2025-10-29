@@ -40,6 +40,7 @@ const AppNavigation: React.FC = () => {
     { id: 137, name: 'Polygon', symbol: 'MATIC' },
     { id: 42161, name: 'Arbitrum', symbol: 'ETH' },
     { id: 11155111, name: 'Sepolia', symbol: 'ETH' },
+    { id: 40, name: 'Telos EVM', symbol: 'TLOS' },
   ];
 
   const getChainName = (chainId?: number) => {
@@ -161,68 +162,90 @@ const AppNavigation: React.FC = () => {
           <div className="flex items-center space-x-4">
             {isConnected ? (
               <div className="flex items-center space-x-3">
-                {/* Chain Selector */}
-                <div className="relative">
-                  <button
-                    onClick={() => setShowChainSelector(!showChainSelector)}
-                    className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-                  >
-                    <Network className="w-4 h-4" />
-                    <span className="text-sm font-medium text-gray-700">
-                      {getChainName(chainId)}
-                    </span>
-                  </button>
-                  
-                  {showChainSelector && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                      {chainOptions.map((chain) => (
-                        <button
-                          key={chain.id}
-                          onClick={() => handleSwitchChain(chain.id)}
-                          className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors ${
-                            chainId === chain.id ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <span>{chain.name}</span>
-                            <span className="text-xs text-gray-500">{chain.symbol}</span>
-                          </div>
-                        </button>
-                      ))}
+                {/* Wallet Status Card */}
+                <div className="relative group">
+                  <div className="flex items-center space-x-3 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200/50 hover:shadow-lg transition-all duration-300">
+                    {/* Network Status */}
+                    <div className="flex items-center space-x-2">
+                      <div className="relative">
+                        <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+                        <div className="absolute inset-0 w-3 h-3 rounded-full bg-green-400/30 animate-ping"></div>
+                      </div>
+                      <span className="text-xs font-medium text-gray-600">
+                        {getChainName(chainId)}
+                      </span>
                     </div>
-                  )}
-                </div>
 
-                {/* User Info */}
-                <div className="text-sm text-gray-600 font-inter">
-                  {ensName || `${address?.slice(0, 6)}...${address?.slice(-4)}`}
-                </div>
-                
-                {/* Balance */}
-                {balance && (
-                  <div className="text-sm text-gray-500 font-inter">
-                    {balance}
+                    {/* User Address */}
+                    <div className="flex items-center space-x-2">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                        <span className="text-xs font-bold text-white">
+                          {address?.slice(2, 4).toUpperCase()}
+                        </span>
+                      </div>
+                      <span className="text-sm font-medium text-gray-700">
+                        {ensName || `${address?.slice(0, 6)}...${address?.slice(-4)}`}
+                      </span>
+                    </div>
+
+                    {/* Balance */}
+                    {balance && (
+                      <div className="text-sm font-semibold text-gray-800">
+                        {balance}
+                      </div>
+                    )}
+
+                    {/* Chain Selector Dropdown */}
+                    <div className="relative">
+                      <button
+                        onClick={() => setShowChainSelector(!showChainSelector)}
+                        className="p-1 rounded-lg hover:bg-white/50 transition-colors"
+                      >
+                        <Network className="w-4 h-4 text-gray-500" />
+                      </button>
+                      
+                      {showChainSelector && (
+                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50">
+                          <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                            Switch Network
+                          </div>
+                          {chainOptions.map((chain) => (
+                            <button
+                              key={chain.id}
+                              onClick={() => handleSwitchChain(chain.id)}
+                              className={`w-full text-left px-4 py-3 text-sm hover:bg-gray-50 transition-colors ${
+                                chainId === chain.id ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                              }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="font-medium">{chain.name}</span>
+                                <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                                  {chain.symbol}
+                                </span>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Disconnect Button */}
+                    <button
+                      onClick={handleDisconnectWallet}
+                      disabled={isDisconnecting}
+                      className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all duration-200 disabled:opacity-50"
+                      title="Disconnect Wallet"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
                   </div>
-                )}
-
-                {/* Avatar */}
-                <div className="relative w-8 h-8 rounded-full overflow-hidden">
-                  <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-                    <span className="text-sm font-medium text-white">
-                      {address?.slice(2, 4).toUpperCase()}
-                    </span>
+                  
+                  {/* Hover Tooltip */}
+                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                    {ensName || `${address?.slice(0, 6)}...${address?.slice(-4)}`}
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-900"></div>
                   </div>
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-500/20 animate-pulse-soft"></div>
                 </div>
-
-                {/* Disconnect Button */}
-                <button
-                  onClick={handleDisconnectWallet}
-                  disabled={isDisconnecting}
-                  className="text-sm text-gray-500 hover:text-gray-700 transition-colors font-inter disabled:opacity-50"
-                >
-                  {isDisconnecting ? 'Disconnecting...' : 'Disconnect'}
-                </button>
               </div>
             ) : (
               <button

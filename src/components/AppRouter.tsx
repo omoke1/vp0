@@ -77,14 +77,18 @@ LoadingFallback.displayName = 'LoadingFallback';
 const AppRouter: React.FC = () => {
   const { isAppLaunched, isLoading, error, clearError } = useAppStore();
 
-  // Debug: Log AppRouter state
+  // Debug: Log AppRouter state in development
   React.useEffect(() => {
-    console.log('🚀 Veyra AppRouter - isAppLaunched:', isAppLaunched, 'isLoading:', isLoading, 'error:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🚀 Veyra AppRouter - isAppLaunched:', isAppLaunched, 'isLoading:', isLoading, 'error:', error);
+    }
   }, [isAppLaunched, isLoading, error]);
 
   // If app hasn't been launched, don't show router
   if (!isAppLaunched) {
-    console.log('🚫 Veyra AppRouter - App not launched, returning null');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🚫 Veyra AppRouter - App not launched, returning null');
+    }
     return null;
   }
 
