@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="relative pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 overflow-hidden">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 flex items-center justify-center" style={{ isolation: 'isolate' }}>
         
@@ -79,13 +79,15 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6">
+      <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col items-center justify-center h-full">
         {/* Brand */}
         <div className="animate-fade-in-up mb-4 sm:mb-6">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 shadow-sm ring-1 ring-black/5 text-xs font-medium text-gray-700 uppercase tracking-wide">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+            <img 
+              src="/assets/vpo-logo-simple.svg" 
+              alt="VPO Logo" 
+              className="w-4 h-4"
+            />
             VPO
           </span>
         </div>

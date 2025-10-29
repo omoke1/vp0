@@ -1,0 +1,45 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="simpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6" />
+      <stop offset="50%" style="stop-color:#8B5CF6" />
+      <stop offset="100%" style="stop-color:#EC4899" />
+    </linearGradient>
+    
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981" />
+      <stop offset="100%" style="stop-color:#059669" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="20" cy="20" r="18" fill="url(#simpleGradient)" opacity="0.1"/>
+  
+  <!-- Central Crystal Ball -->
+  <circle cx="20" cy="20" r="12" fill="url(#simpleGradient)"/>
+  
+  <!-- Inner Glow -->
+  <circle cx="20" cy="20" r="8" fill="#FFFFFF" opacity="0.3"/>
+  
+  <!-- Verification Shield (V) - Top Left -->
+  <path d="M8 8 L8 4 L12 4 L12 8 L10 10 Z" fill="url(#accentGradient)"/>
+  <path d="M9 5 L9 7 L10 8 L11 7 L11 5 Z" fill="#FFFFFF" opacity="0.8"/>
+  
+  <!-- Checkmark -->
+  <path d="M9.5 6 L10.5 7 L11.5 5.5" stroke="#FFFFFF" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Prediction Eye (P) - Top Right -->
+  <ellipse cx="28" cy="8" rx="4" ry="6" fill="url(#simpleGradient)"/>
+  <ellipse cx="28" cy="8" rx="2.5" ry="4" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="28" cy="8" r="1.5" fill="url(#simpleGradient)"/>
+  <circle cx="28.5" cy="7.5" r="0.5" fill="#FFFFFF" opacity="0.8"/>
+  
+  <!-- Oracle Nodes -->
+  <circle cx="6" cy="20" r="2" fill="url(#simpleGradient)" opacity="0.7"/>
+  <circle cx="34" cy="20" r="2" fill="url(#simpleGradient)" opacity="0.7"/>
+  <circle cx="20" cy="6" r="2" fill="url(#simpleGradient)" opacity="0.7"/>
+  <circle cx="20" cy="34" r="2" fill="url(#simpleGradient)" opacity="0.7"/>
+  
+  <!-- Central Dot -->
+  <circle cx="20" cy="20" r="2" fill="#FFFFFF" opacity="0.9"/>
+</svg>
