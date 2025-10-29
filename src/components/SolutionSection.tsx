@@ -17,7 +17,7 @@ const SolutionSection: React.FC = () => {
             <span>The Solution</span>
           </div>
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-tight mt-4 sm:mt-6 px-4 sm:px-0">
-            VPO turns computation into <span className="text-gradient">cryptographic truth</span>
+            Veyra turns computation into <span className="text-gradient">cryptographic truth</span>
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto mt-3 px-4 sm:px-0">
             From data to proof — no humans, no delays.
@@ -45,7 +45,7 @@ const SolutionSection: React.FC = () => {
           <div className="flex items-center gap-3 flex-shrink-0">
             <div className="text-sm font-medium text-gray-500">Polymarket</div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-            <div className="text-sm font-medium text-gray-500">VPO Adapter</div>
+            <div className="text-sm font-medium text-gray-500">Veyra Adapter</div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
             <div className="text-sm font-medium text-gray-500">EigenCloud</div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
@@ -55,7 +55,7 @@ const SolutionSection: React.FC = () => {
           <div className="flex items-center gap-3 flex-shrink-0">
             <div className="text-sm font-medium text-gray-500">Polymarket</div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-            <div className="text-sm font-medium text-gray-500">VPO Adapter</div>
+            <div className="text-sm font-medium text-gray-500">Veyra Adapter</div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
             <div className="text-sm font-medium text-gray-500">EigenCloud</div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
