@@ -1,10 +1,13 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
-const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  onLaunchApp?: () => void;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchApp }) => {
   const handleLaunchApp = () => {
-    // Handle launch app action
-    console.log('Launch App clicked');
+    onLaunchApp?.();
   };
 
   const handleReadWhitepaper = () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/index.css';
 import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
@@ -8,8 +8,25 @@ import HowItWorksSection from './components/HowItWorksSection';
 import IntegrationSection from './components/IntegrationSection';
 import UseCasesSection from './components/UseCasesSection';
 import Footer from './components/Footer';
+import VPODashboard from './components/VPODashboard';
 
 const App: React.FC = () => {
+  const [showDashboard, setShowDashboard] = useState(false);
+
+  const handleLaunchApp = () => {
+    setShowDashboard(true);
+  };
+
+  const handleBackToLanding = () => {
+    setShowDashboard(false);
+  };
+
+  // Show dashboard if requested
+  if (showDashboard) {
+    return <VPODashboard onBackToLanding={handleBackToLanding} />;
+  }
+
+  // Otherwise show landing page
   return (
     <div className="bg-white text-gray-900 antialiased selection:bg-blue-200 selection:text-blue-900">
       {/* Video Background */}
@@ -24,8 +41,8 @@ const App: React.FC = () => {
         />
       </div>
       
-      <Navigation />
-      <HeroSection />
+      <Navigation onLaunchApp={handleLaunchApp} />
+      <HeroSection onLaunchApp={handleLaunchApp} />
       <ProblemSection />
       <SolutionSection />
       <HowItWorksSection />
