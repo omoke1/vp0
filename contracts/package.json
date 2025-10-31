@@ -1,0 +1,48 @@
+{
+  "name": "vp0-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf cache artifacts",
+    "compile": "hardhat compile",
+    "node": "hardhat node",
+    "test": "hardhat test",
+    "deploy:localhost": "hardhat run scripts/deploy-core.ts --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy-core.ts --network sepolia",
+    "deploy:mainnet": "hardhat run scripts/deploy-core.ts --network mainnet"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^16.4.1",
+    "hardhat": "^2.22.3",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.5"
+  }
+}
+
+{
+  "name": "vp0-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf cache artifacts",
+    "compile": "hardhat compile",
+    "node": "hardhat node",
+    "test": "hardhat test",
+    "deploy:localhost": "hardhat run scripts/deploy-core.ts --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy-core.ts --network sepolia",
+    "deploy:mainnet": "hardhat run scripts/deploy-core.ts --network mainnet"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^16.4.1",
+    "hardhat": "^2.22.3",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.5"
+  }
+}
+
+
+
