@@ -1,0 +1,27 @@
+{
+  "abi": [
+    {"inputs":[],"stateMutability":"nonpayable","type":"constructor"},
+    {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},
+    {"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"proofHash","type":"bytes32"},{"indexed":true,"internalType":"address","name":"invalidator","type":"address"}],"name":"ProofInvalidated","type":"event"},
+    {"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"proofHash","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"marketId","type":"bytes32"},{"indexed":false,"internalType":"bytes32","name":"result","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"ProofRegistered","type":"event"},
+    {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"registrar","type":"address"},{"indexed":false,"internalType":"bool","name":"authorized","type":"bool"}],"name":"RegistrarAuthorized","type":"event"},
+    {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedRegistrars","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+    {"inputs":[{"internalType":"bytes32[]","name":"proofHashes","type":"bytes32[]"}],"name":"batchCheckProofs","outputs":[{"internalType":"bool[]","name":"exists","type":"bool[]"}],"stateMutability":"view","type":"function"},
+    {"inputs":[{"internalType":"bytes32","name":"proofHash","type":"bytes32"}],"name":"getProof","outputs":[{"components":[{"internalType":"bytes32","name":"marketId","type":"bytes32"},{"internalType":"bytes32","name":"result","type":"bytes32"},{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"bool","name":"isValid","type":"bool"},{"internalType":"bytes","name":"proofData","type":"bytes"}],"internalType":"struct VPOProofRegistry.ProofInfo","name":"proof","type":"tuple"}],"stateMutability":"view","type":"function"},
+    {"inputs":[{"internalType":"bytes32","name":"proofHash","type":"bytes32"}],"name":"getProofInfo","outputs":[{"internalType":"bytes32","name":"marketId","type":"bytes32"},{"internalType":"bytes32","name":"result","type":"bytes32"},{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"bool","name":"isValid","type":"bool"}],"stateMutability":"view","type":"function"},
+    {"inputs":[],"name":"getStatistics","outputs":[{"internalType":"uint256","name":"_totalProofs","type":"uint256"},{"internalType":"uint256","name":"_validProofs","type":"uint256"}],"stateMutability":"view","type":"function"},
+    {"inputs":[{"internalType":"bytes32","name":"proofHash","type":"bytes32"}],"name":"invalidateProof","outputs":[],"stateMutability":"nonpayable","type":"function"},
+    {"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+    {"inputs":[{"internalType":"bytes32","name":"proofHash","type":"bytes32"}],"name":"proofExists","outputs":[{"internalType":"bool","name":"exists","type":"bool"}],"stateMutability":"view","type":"function"},
+    {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"proofExistsMapping","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+    {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"proofs","outputs":[{"internalType":"bytes32","name":"marketId","type":"bytes32"},{"internalType":"bytes32","name":"result","type":"bytes32"},{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"bool","name":"isValid","type":"bool"},{"internalType":"bytes","name":"proofData","type":"bytes"}],"stateMutability":"view","type":"function"},
+    {"inputs":[{"internalType":"bytes32","name":"proofHash","type":"bytes32"},{"internalType":"bytes32","name":"marketId","type":"bytes32"},{"internalType":"bytes32","name":"result","type":"bytes32"},{"internalType":"bytes","name":"proofData","type":"bytes"}],"name":"registerProof","outputs":[],"stateMutability":"nonpayable","type":"function"},
+    {"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},
+    {"inputs":[{"internalType":"address","name":"registrar","type":"address"},{"internalType":"bool","name":"authorized","type":"bool"}],"name":"setRegistrarAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"},
+    {"inputs":[],"name":"totalProofs","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+    {"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},
+    {"inputs":[],"name":"validProofs","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+  ]
+}
+
+
